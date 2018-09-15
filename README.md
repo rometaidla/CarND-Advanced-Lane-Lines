@@ -30,11 +30,11 @@ By combining S channel in HLS colorspace and B channel in LAB colorspace seemed 
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-I marked polycon on test image using relative position to full image (`(.440*imshape[1], .65*imshape[0])`):
+I marked polycon on test image using relative position to full image (for ex. `(.440*imshape[1], .65*imshape[0])`):
 
 ![transform area](./output_images/transform_area.png)
 
-Then I change top right and top left corner x coordinates to be same as bottom right and left corners and calculated perspective transform matrix using `cv2.getPerspectiveTransform(src, dest)`.
+Then I changed top right and top left corner x coordinates to be same as bottom right and left corners and calculated perspective transform matrix using `cv2.getPerspectiveTransform(src, dest)`.
 
 Using transform matrix I warped image perspective using `cv2.warpPerspectice` and got following result:
 
@@ -50,7 +50,7 @@ I then tested perspective transform on all test images to validate it is working
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-I first took histogram of bottom half of the image to find peak of the left and right halves, which are starting points for left and right lines.
+I first took histogram of bottom half of the image to find historgram peaks of the left and right halves, which are starting points for left and right lines.
 
 Then 9 windows where used to vertically step through the image and find line pixels. Windows were centered around mean of pixel locations identified in previous window, histogram peak was used for first window.
 
@@ -66,7 +66,7 @@ See chapter _"4. Finding lines"_ in notebook for more info.
 
 Radius of curvature was calculated in chapter _"5. Curvature"_.
 
-Curvature was then calculated for both lines using following formula:
+Curvature was  calculated for both lines using following formula:
 
 ![](./output_images/curvature.png)
 
@@ -78,7 +78,7 @@ Vehicle position with respect to lane center was calculate by calculating pixel 
 
 Meters per pixel in x dimension was calculated by dividing estimated lane width 3.7m divided by lane pixel count on image.
 
-`xm_per_pix = 3.7/800`l
+`xm_per_pix = 3.7/800`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -88,7 +88,7 @@ This was the result:
 
 ![](./output_images/draw_lanes.png)
 
-I added additionally small overlay, which help diagnose problems when lane lines are not detected correctly
+I added additionally small overlay, which helps diagnose problems when lane lines are not detected correctly
 
 ---
 
